@@ -1,0 +1,13 @@
+<h1>Main page</h1>
+
+<ul>
+<% @races.each do |r|%>
+    <% if r.status %>
+        <%= r.name %>  |
+        <%= r.miles %>  |
+        <%= r.date %> 
+    
+    <% end %>
+
+<% end %>
+</ul>
