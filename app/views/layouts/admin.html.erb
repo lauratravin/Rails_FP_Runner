@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Console</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+<nav>
+<p><%= link_to "Races", races_path %><p>
+<%# <p><%= link_to "Login", login_path %><p> %>
+<p><%= link_to "Log Out", logout_path %><p>
+admin layout
+<hr />
+<% unless current_user %>
+<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<% else %>
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% end %>
+
+
+
+</nav>
+  <body>
+  <h1>I am layout/application</h1>
+    <%= yield %>
+  </body>
+</html>

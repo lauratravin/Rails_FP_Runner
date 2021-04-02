@@ -1,0 +1,9 @@
+<h1>Login form</h1>
+
+<%= form_tag(sessions_path) do%>
+     <%= text_field_tag :email, '', :placeholder => "Your Email"%>
+     <%= password_field_tag :password, '', :placeholder => "Your Password"%>
+
+     <%= submit_tag "Login"%>
+    
+<% end %>
