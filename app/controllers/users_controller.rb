@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_action  :redirect_ifnotloggedin,  except: [:new]
 
   def new
   end
@@ -8,12 +8,13 @@ class UsersController < ApplicationController
 
   def create
         @user =  User.new
+     
         @user.name= params[:name]
         @user.email= params[:email]
         @user.dob= params[:dob]
         @user.pace= params[:pace]
-        @user.password= params[:password]
-        binding.pry
+    
+      
         if   @user.save
         @user.generatememberid
         redirect_to login_path
@@ -33,13 +34,13 @@ class UsersController < ApplicationController
        
   end   
   def update
-            @user.update(:name => params[:name-0],
-                :email => params[:email],
-                :dob => params[:dob],
-                :email => params[:email],
-                :pace => params[:pace],
-                :password => params[:password])
-            redirect_to root_path
+            @user = User.find(params[:id])
+            @user.update(:name => params[:user][:name],
+                :email => params[:user][:email],
+                :dob => params[:user][:dob],
+                :email => params[:user][:email],
+                :pace => params[:user][:pace])
+            redirect_to user_path(@user)
   end 
   
   

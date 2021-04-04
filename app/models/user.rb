@@ -3,11 +3,17 @@ class User < ActiveRecord::Base
 
     has_many :registrations
     has_many :races, through: :registrations
+
     has_secure_password
+
     # validates :name, presence: true
     validates :name, :presence => true
     validates :email, :presence => true
     validates :email, :uniqueness => true
+    validates :pace, :presence => true
+    validates :dob, :presence => true
+
+
 
     def self.new_with_session(params, session)
         super.tap do |user|
@@ -36,6 +42,16 @@ class User < ActiveRecord::Base
         update_attribute(:member_num, "NYRR"+self.dob.strftime("%m%d%Y")+self.id.to_s)   
        
    end 
+
+   def cal_estimated_time(distance) 
+     (distance.to_f/self.pace).round(2)
+   end 
+
+   #this method returs true if the user has not registered to this race
+   def valid_race(rid)
+        !Registration.where(user_id: self.id, race_id: rid).exists?
+   end 
+
 
    def get_results
     return "a"

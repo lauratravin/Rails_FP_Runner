@@ -1,10 +1,17 @@
 <h1>Welcome, <%=current_user(session).name %></h1>
 <h1>Member: <%=current_user(session).member_num %></h1>
+<h1>Pace (minutes) per mile: <%=current_user(session).pace %></h1>
+<h1>Email: <%=current_user(session).email %></h1>
+
+
+<p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
 <%# User data %>
 
-<%# your registrations %>
-
-
+<p>Your registrations <p>
+<% @user.registrations.each do |re|%>
+<%= re.race_id%> <br>
+<%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %>  <br>
+<% end %>
 <hr>
 
 
@@ -12,14 +19,13 @@
 
 <%# this can go into a partial with some logic %>
 <% @available_races.each do |r| %>
-  <% if r.status %>
-
-  <%= r.name %> |
-  <%= r.miles %>  | 
-  <%= r.date %> <br>
-
- <%# <%= link_to "Register", new_user_registration_path %>  
- <%# <%= form_for @user, controller: 'users', action: 'create' do |f| %>
-  <%#<% end %>
+  <% if r.status && @user.valid_race(r.id) %>
+       <%= r.id %> |
+      <%= r.name %> |
+      <%= r.miles %>  | 
+      <%= r.date %> |
+      <%= link_to "Register", user_registrations_path(@user,:race => r.id), method:  :post %>  <br>
+     
+      
   <% end %>
 <%end%>

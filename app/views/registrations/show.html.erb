@@ -1,0 +1,13 @@
+<h1>Register</h1>
+
+<h1>Race Name: <%= @race.name %></h1>
+<h4>Miles: <%= @race.miles %></h4>
+<h4>Date: <%= @race.date %></h4>
+
+<h4>Runner <%= @user.name %>'s estimation time based on your pace: <%= @registration.estimated %> minutes </h4>
+
+<%if !@registration.race.status %>
+   <h3> <%= @registration.result %> </h3>
+<% end %>
+
+<%= link_to "My races", user_path(@user)%>

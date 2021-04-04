@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 root 'application#nyrr'
 
 #routes for User
-resources :users, :only =>  [:new, :create, :edit, :update]
+resources :users, :only =>  [:new, :create, :edit, :update, :show]
+
 resources :users, only: [:show] do
    resources :registrations, only: [:index, :show, :create, :destroy]
 end  
