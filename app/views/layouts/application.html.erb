@@ -10,16 +10,24 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 <nav>
-<p><%= link_to "Sign up", new_user_path %><p>
-<p><%= link_to "Login", login_path %><p>
-<p><%= link_to "Log Out", logout_path %><p>
 
-<hr />
-<% unless current_user %>
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-<% else %>
-<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% if !is_logged_in?(session) %>
+   <p><%= link_to "Sign up", new_user_path %><p>
+   <p><%= link_to "Login", login_path %><p>
+   <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<%else%>
+   <p><%= link_to "Log Out", logout_path %><p>
+   <%# <%= link_to "Logout", destroy_user_session_path, method: :delete %> 
+
 <% end %>
+
+
+<%# <hr />
+<% unless current_user %>
+<%# <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<%# <% else %>
+<%# <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<%# <% end %>
 
 
 

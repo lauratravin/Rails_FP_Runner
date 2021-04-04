@@ -6,10 +6,11 @@ class ApplicationController < ActionController::Base
     end    
 
     def redirect_ifnotadmin
-        binding.pry
-        if !User.find(session[user_id]).admin
+        if !User.find(session[:user_id]).admin
            redirect_to root_path 
         end
-    end    
+    end  
+    
+
 
 end

@@ -1,0 +1,10 @@
+<%= form_for(@race) do |f| %>
+ <%= f.label :name %>
+ <%= f.text_field :name %>
+ <%= f.label :miles %>
+ <%= f.number_field :miles %>
+  <%= f.label :date %>
+ <%= f.date_field :date %>
+
+ <%= f.submit %>
+<% end %>

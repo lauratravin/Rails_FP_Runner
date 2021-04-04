@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 root 'application#nyrr'
 
 #routes for User
-resources :users, :only =>  [:new, :create, :edit, :update, :show]
+resources :users, :only =>  [:new, :create, :edit, :update]
+resources :users, only: [:show] do
+   resources :registrations, only: [:index, :show, :create, :destroy]
+end  
+
+
+
 get '/admin' => "admin#index" 
 
 #routes for sessions
@@ -20,6 +26,7 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
 
 #routes for races
 resources :races, :only =>  [:index, :new, :create, :edit, :update, :show]
+post '/status' => "races#updatestatus"
 
 
 end

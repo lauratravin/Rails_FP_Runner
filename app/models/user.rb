@@ -24,4 +24,22 @@ class User < ActiveRecord::Base
             user.image = auth.info.image # assuming the user model has an image
         end
     end
+
+   #other methods
+   def find_available_races
+          @races = Race.all
+
+   end
+
+   def  generatememberid       
+ 
+        update_attribute(:member_num, "NYRR"+self.dob.strftime("%m%d%Y")+self.id.to_s)   
+       
+   end 
+
+   def get_results
+    return "a"
+   end 
+   
+
 end

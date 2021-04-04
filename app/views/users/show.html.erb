@@ -1,4 +1,5 @@
-<h1>Welcome, <%=Helper.current_user(session).name %></h1>
+<h1>Welcome, <%=current_user(session).name %></h1>
+<h1>Member: <%=current_user(session).member_num %></h1>
 <%# User data %>
 
 <%# your registrations %>
@@ -10,3 +11,15 @@
 <h2>Available Races for you </h2>
 
 <%# this can go into a partial with some logic %>
+<% @available_races.each do |r| %>
+  <% if r.status %>
+
+  <%= r.name %> |
+  <%= r.miles %>  | 
+  <%= r.date %> <br>
+
+ <%# <%= link_to "Register", new_user_registration_path %>  
+ <%# <%= form_for @user, controller: 'users', action: 'create' do |f| %>
+  <%#<% end %>
+  <% end %>
+<%end%>

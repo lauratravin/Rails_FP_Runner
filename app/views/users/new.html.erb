@@ -1,21 +1,41 @@
 
 <h1> Sign up!</h1>
 
-<%= form_for @user, controller: 'users', action: 'create' do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %> <br>
+<%# <%= form_for @user, controller: 'users', action: 'create' do |f| %>
+ <%#    <%= f.label :name %>
+ <%#    <%= f.text_field :name %> <br>
 
-    <%= f.label 'Date of Birth'%>
-    <%= f.date_field :dob %><br>
+ <%#    <%= f.label 'Date of Birth'%>
+ <%#    <%= f.date_field :dob %><br>
 
-    <%= f.label 'Pace per mile'%>
-    <%= f.number_field :pace %><br>
+ <%#    <%= f.label 'Pace per mile'%>
+ <%#    <%= f.number_field :pace %><br>
 
-    <%= f.label :email %>
-    <%= f.text_field :email %><br>
+  <%#   <%= f.label :email %>
+  <%#   <%= f.text_field :email %><br>
    
-    <%= f.label :password %>
-    <%= f.password_field :password %><br>
+  <%#   <%= f.label :password %>
+  <%#   <%= f.password_field :password %><br>
   
-    <%= f.submit "Create" %>
+  <%#   <%= f.submit "Create" %>
+<%# <% end %> 
+
+<%= form_tag users_path do %>
+    <label>Your name</label>
+    <%= text_field_tag :name %><br>
+
+    <label>Date of Birth</label>
+    <%= date_field_tag :dob %><br>
+
+    <label>Pace per mile</label>
+    <%= number_field_tag :miles %><br>
+
+    <label>Email</label>
+    <%= text_field_tag :email %><br>
+
+    <label>Password (1234)</label>
+    <%= password_field_tag :password %><br>
+
+    <%= submit_tag "Create Runner"%>
+
 <% end %>

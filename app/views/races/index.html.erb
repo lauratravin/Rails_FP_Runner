@@ -1,10 +1,31 @@
-<h1>Index races</h1>
+<h1>Index races with admin</h1>
 <ul>
-<% @races.each do |r|%>
+<% @races.order(:date).each do |r|%>
+
+      <% if !r.status %>
+        <%= r.name %>  |
+        <%= r.miles %>  |
+        <%= r.date %> |
+        <%= r.status %> |
+        <%= link_to "Edit Race", edit_race_path(r)%>
+<br>  
+    <% end %>
+  <hr>
     <% if r.status %>
         <%= r.name %>  |
         <%= r.miles %>  |
-        <%= r.date %>     
+        <%= r.date %> |
+        <%= r.status %> |
+        <%= link_to "Edit Race", edit_race_path(r)%>
+<br>  
     <% end %>
 <% end %>
 </ul>
+
+
+<%= link_to "Create Races", new_race_path%>
+
+<%= button_to "Change Races Status", :action => "updatestatus" %>
+
+
+<%= link_to "Console", admin_path%>

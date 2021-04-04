@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
                     if !user.admin
                      redirect_to user_path(user)
                     else
-                        binding.pry
-                    render admin_path  
+                      
+                    redirect_to admin_path  
                     end     
                 else 
                     render 'sessions/new' 
@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
 
 
      def destroy
-       
         # reset_session #deprecated
         session.delete(:user_id)  #https://3rd-edition.railstutorial.org/book/log_in_log_out
         redirect_to root_path
