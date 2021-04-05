@@ -8,6 +8,18 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+
+
   </head>
 <nav>
 
@@ -22,12 +34,6 @@
 <% end %>
 
 
-<%# <hr />
-<% unless current_user %>
-<%# <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-<%# <% else %>
-<%# <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<%# <% end %>
 
 
 

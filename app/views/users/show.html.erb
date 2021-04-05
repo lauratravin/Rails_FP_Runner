@@ -1,15 +1,15 @@
 <h1>Welcome, <%=current_user(session).name %></h1>
-<h1>Member: <%=current_user(session).member_num %></h1>
-<h1>Pace (minutes) per mile: <%=current_user(session).pace %></h1>
-<h1>Email: <%=current_user(session).email %></h1>
+<h4>Member: <%=current_user(session).member_num %></h4>
+<h4>Pace (minutes) per mile: <%=current_user(session).pace %></h4>
+<h4>Email: <%=current_user(session).email %></h4>
 
 
 <p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
 <%# User data %>
 
-<p>Your registrations <p>
+<h1>Your registrations </h1>
 <% @user.registrations.each do |re|%>
-<%= re.race_id%> <br>
+<%= re.race.id%> | <%= re.race.name%> | <%= re.race.date %> | <%= link_to "More", race_path(re.race) %>
 <%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %>  <br>
 <% end %>
 <hr>
@@ -24,6 +24,7 @@
       <%= r.name %> |
       <%= r.miles %>  | 
       <%= r.date %> |
+     | <%= link_to "More", race_path(r) %>
       <%= link_to "Register", user_registrations_path(@user,:race => r.id), method:  :post %>  <br>
      
       

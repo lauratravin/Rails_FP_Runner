@@ -21,6 +21,7 @@ class RacesController < ApplicationController
     end
     def show
         @race= Race.find(params[:id])
+
     end
     def edit
         @race= Race.find(params[:id])  
