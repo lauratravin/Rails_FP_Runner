@@ -1,4 +1,24 @@
-<h1>I am admin page</h1>
+<h1>Admin's Console</h1>
 
 <%= link_to "Races", races_path%>
+<%= link_to "Users", users_path%>
+
+<br>
+<h2>Registrations</h2>
+
+<% @registrations.order(:race_id).each do |re|%>
+    <% if re.race.status %>
+      <span style="background:green">  <%= re.race_id %>  </span>|
+    <% else %>
+     <span style="background:red">  <%= re.race_id %>  </span>|
+    <% end %> 
+        <%= re.race.name %> |
+          <%= re.race.status %> |
+        <%= re.race.miles %> |
+        <%= re.user.member_num %> |
+        <%= re.user.name %> 
+        <%= re.estimated %> |
+        <%= re.result %> <br>
+ <%end %>
+
 

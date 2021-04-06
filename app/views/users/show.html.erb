@@ -1,26 +1,37 @@
-<h1>Welcome, <%=current_user(session).name %></h1>
-<h4>Member: <%=current_user(session).member_num %></h4>
-<h4>Pace (minutes) per mile: <%=current_user(session).pace %></h4>
-<h4>Email: <%=current_user(session).email %></h4>
+
+<% if is_admin?(session)%>
+    <h1>Admin, this is user is <%=@user.name %></h1>
+    <%= link_to "User console", users_path%><br>
+    <%= link_to "Console", admin_path%>
+    <% else%>
+    <h1>Welcome, <%=@user.name %></h1>
+<% end %>
+
+<h4>Member: <%=@user.member_num %></h4>
+<h4>Pace (minutes) per mile: <%=@user.pace %></h4>
+<h4>Email: <%=@user.email %></h4>
+
+<% if !is_admin?(session)%>
+   <p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
+<% end %>
 
 
-<p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
-<%# User data %>
-
-<h1>Your registrations </h1>
-<% @user.registrations.each do |re|%>
-<%= re.race.id%> | <%= re.race.name%> | <%= re.race.date %> | <%= link_to "More", race_path(re.race) %>
-<%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %>  <br>
+<h1>Registrations </h1>
+<% @registered_active_races.each do |re|%>
+race id <%= re.race.id%> | <%= re.race.name%> | <%= re.race.date %> | <%= re.race.status %> | <%= link_to "Race Location", race_path(re.race) %>
+<%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %> |
+<%= link_to "Registration Details", user_registration_path(@user, re.id) %> 
+ <br>
 <% end %>
 <hr>
 
 
-<h2>Available Races for you </h2>
+<h2>Available Races</h2>
 
 <%# this can go into a partial with some logic %>
 <% @available_races.each do |r| %>
   <% if r.status && @user.valid_race(r.id) %>
-       <%= r.id %> |
+race id  <%= r.id %> |
       <%= r.name %> |
       <%= r.miles %>  | 
       <%= r.date %> |
@@ -30,3 +41,15 @@
       
   <% end %>
 <%end%>
+
+<h2>Old Races</h2>
+
+<% @oldraces.each do |o|%>
+race id <%= o.race.id %>| 
+<%= o.race.name%>| 
+<%= o.race.date%>| 
+Miles : <%= o.race.miles%>| 
+Estimated time <%= o.estimated%>| 
+Result time <%= o.result%> <br>
+
+<% end %>

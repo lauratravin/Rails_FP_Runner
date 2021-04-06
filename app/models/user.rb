@@ -33,14 +33,32 @@ class User < ActiveRecord::Base
 
    #other methods
    def find_available_races
-          @races = Race.all
+          @races = Race.activeraces
 
+   end
+   def find_oldraces
+        oldraces = []
+        Registration.where(user_id: self.id).each do |a|                     
+            if Race.inactiveraces.include?(a.race)
+              
+                oldraces << a
+            end    
+        end   
+        oldraces
+   end 
+   def find_registered_races
+            regraces = []
+            Registration.where(user_id: self.id).each do |a|                     
+                if Race.activeraces.include?(a.race)
+                
+                    regraces << a
+                end    
+            end   
+            regraces
    end
 
    def  generatememberid       
- 
-        update_attribute(:member_num, "NYRR"+self.dob.strftime("%m%d%Y")+self.id.to_s)   
-       
+        update_attribute(:member_num, "NYRR"+self.dob.strftime("%m%d%Y")+self.id.to_s)         
    end 
 
    def cal_estimated_time(distance) 

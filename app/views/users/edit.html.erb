@@ -16,3 +16,12 @@
   
     <%= f.submit "Update your profile" %>
 <% end %>
+
+<% if !is_admin?(session)%>
+   <%= link_to "Back", user_path(current_user(session))%><br>
+   <%= link_to "Console", admin_path%>
+  <% else %>
+
+
+  <%= link_to "User console", users_path%>
+  <% end %>

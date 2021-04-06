@@ -1,11 +1,11 @@
 <h1>Main page</h1>
 
 <ul>
-<% @races.each do |r|%>
-    <% if r.status %>
+<% @activeraces.each do |r|%>
+    
         <%= r.name %>  |
         <%= r.miles %>  |
         <%= r.date %>     
-    <% end %>
+        <br>
 <% end %>
 </ul>

@@ -3,6 +3,7 @@ class AdminController < ApplicationController
 
     def index
         @races =  Race.all
+        @registrations = Registration.all
     end 
 
 end

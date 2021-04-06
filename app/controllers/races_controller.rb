@@ -1,6 +1,15 @@
 class RacesController < ApplicationController
  before_action  :redirect_ifnotadmin,  except: [:show]
+#  layout 'admin', :except => :show
+layout :choose_layout
 
+        def choose_layout
+            if helpers.is_admin?(session)
+            'admin'
+            end
+        end
+
+     
     def index
          @races = Race.all
     end
@@ -12,6 +21,9 @@ class RacesController < ApplicationController
         @race.name= params[:race][:name]
         @race.date= params[:race][:date]
         @race.miles= params[:race][:miles]
+        @race.miles= params[:race][:latitud]
+        @race.miles= params[:race][:longitud]
+
         @race.status = true #by default
         if @race.save
           redirect_to races_path
@@ -21,6 +33,7 @@ class RacesController < ApplicationController
     end
     def show
         @race= Race.find(params[:id])
+        
 
     end
     def edit
@@ -30,7 +43,9 @@ class RacesController < ApplicationController
         @race= Race.find(params[:id])  
         @race.update( :name => params[:race][:name],
                       :miles => params[:race][:miles],
-                      :date => params[:race][:date])
+                      :date => params[:race][:date],
+                      :latitud => params[:race][:latitud],
+                      :longitud => params[:race][:longitud])
         redirect_to races_path              
     end   
     def updatestatus

@@ -1,22 +1,38 @@
 class UsersController < ApplicationController
-  before_action  :redirect_ifnotloggedin,  except: [:new]
+ before_action  :redirect_ifnotloggedin,  except: [:new,:create]
+ layout :choose_layout, except: [:new, :create]
+  # layout 'admin', except: [:new,:show, :edit]
+
+  def choose_layout
+    if helpers.is_admin?(session)
+      'admin' 
+    end
+  end
+
+  def index
+    @users= User.all
+    if !helpers.is_admin?(session)
+      redirect_to root_path
+    end  
+
+  end  
 
   def new
   end
 
-  
-
   def create
-        @user =  User.new
+        @newuser =  User.new
      
-        @user.name= params[:name]
-        @user.email= params[:email]
-        @user.dob= params[:dob]
-        @user.pace= params[:pace]
-    
-      
-        if   @user.save
-        @user.generatememberid
+        @newuser.name= params[:name]
+        @newuser.email= params[:email]
+        @newuser.dob= params[:dob]
+        @newuser.pace= params[:pace]
+        @newuser.password= params[:password]
+        # @newuser.admin = false
+        if   @newuser.save
+          
+        @newuser.generatememberid
+
         redirect_to login_path
         else 
             render :new 
@@ -24,13 +40,24 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_id(params[:id])
+    
+    @user = User.find(params[:id])
+
+    @registered_active_races = @user.find_registered_races
+    
     @available_races = @user.find_available_races
+    
+    @oldraces= @user.find_oldraces
+
   end 
 
 
   def edit
+  
         @user = User.find(params[:id])
+        if !@user || ( @user != helpers.current_user(session) && !helpers.is_admin?(session) )
+              redirect_to root_path
+        end    
        
   end   
   def update
@@ -40,7 +67,11 @@ class UsersController < ApplicationController
                 :dob => params[:user][:dob],
                 :email => params[:user][:email],
                 :pace => params[:user][:pace])
-            redirect_to user_path(@user)
+            if helpers.is_admin?(session)
+              redirect_to admin_path
+            else   
+              redirect_to user_path(@user)
+            end
   end 
   
   

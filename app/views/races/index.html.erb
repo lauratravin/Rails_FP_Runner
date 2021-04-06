@@ -1,27 +1,37 @@
-<h1>Index races with admin</h1>
-<ul>
+<h1>All Races</h1>
+
+<h2>Races</h2>
+
 <% @races.order(:date).each do |r|%>
 
-      <% if !r.status %>
+        <%= r.id %>  |
         <%= r.name %>  |
         <%= r.miles %>  |
         <%= r.date %> |
-        <%= r.status %> |
+
+       <%  if r.status  %>
+         <span style="background:green">   <%=  r.status %> </span>
+       <% else %>
+         <span style="background:red">   <%=  r.status %> </span>
+       <% end %>
+        |
+       Inscriptions: <%= r.registrations.count %>
+
         <%= link_to "Edit Race", edit_race_path(r)%>
-<br>  
-    <% end %>
-  <hr>
-    <% if r.status %>
-        <%= r.name %>  |
-        <%= r.miles %>  |
-        <%= r.date %> |
-        <%= r.status %> |
-        <%= link_to "Edit Race", edit_race_path(r)%>
-        <%= link_to "Show Race", race_path(r)%>
-<br>  
-    <% end %>
+         <%= link_to "Show Race", race_path(r)%>
+
+   <br>
+ 
 <% end %>
-</ul>
+
+
+
+
+
+
+
+
+
 
 
 <%= link_to "Create Races", new_race_path%>
