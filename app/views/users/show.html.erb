@@ -50,6 +50,8 @@ race id <%= o.race.id %>|
 <%= o.race.date%>| 
 Miles : <%= o.race.miles%>| 
 Estimated time <%= o.estimated%>| 
-Result time <%= o.result%> <br>
+Result time <%= o.result%> | 
+<%= link_to "Registration Details", user_registration_path(@user, o.id) %> <br>
+
 
 <% end %>

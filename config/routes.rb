@@ -9,10 +9,10 @@ root 'application#nyrr'
 resources :users, :only =>  [:index, :new, :create, :edit, :update, :show]
 
 resources :users, only: [:show] do
-   resources :registrations, only: [:index, :show, :create, :destroy]
+   resources :registrations, only: [:index, :show, :create, :destroy, :edit, :update ]
 end  
 
-
+resources :registration
 
 get '/admin' => "admin#index" 
 

@@ -1,0 +1,30 @@
+<h1> Edit Registration</h1>
+
+
+     <h3> "Runner" <h3>
+  
+    <%= @registration.user_id %> | 
+    <%= @registration.user.name %> |
+    <%= @registration.user.member_num %>
+
+  <br>
+
+
+   <h3> "Race" <h3>
+    <%= @registration.race_id %> |
+    <%= @registration.race.name %><br>
+
+   <h3> "Estimated time" <h3>
+   <%= @registration.estimated %><br>
+
+   
+   
+<%= form_tag user_registration_path(@registration), method: "patch" do %>
+
+        <h3>Result:</h3>
+         <%= text_field_tag :result, @registration.result %><br>
+        <%= submit_tag "Update result" %>
+<% end %>
+
+   <%= link_to "Back", user_path(current_user(session))%><br>
+   <%= link_to "Console", admin_path%>

@@ -23,20 +23,34 @@ class RegistrationsController < ApplicationController
 
       def create
        
-
         @user = User.find(params[:user_id])
         @race = Race.find(params[:race])
-        @registration = Registration.new
-        @registration.user = @user
-        @registration.race= @race
-        @registration.estimated = @user.cal_estimated_time(@race.miles)
-        if @registration.save
-          redirect_to user_registration_path(@user, @registration)
-        else
-          redirect_to user_path(@user)
-        end   
+        if @user && @race 
+            @registration = Registration.new
+            @registration.user = @user
+            @registration.race= @race
+            @registration.estimated = @user.cal_estimated_time(@race.miles)
+            if @registration.save
+              redirect_to user_registration_path(@user, @registration)
+            else
+              redirect_to user_path(@user)
+            end   
+        else   
+          edirect_to user_path(@user)
+        end 
       end  
          
+      def edit
+        # binding.pry
+           if user = User.find_by(id: params[:user_id])       
+           @registration =  user.registrations.find_by(id: params[:id])
+           end
+      end
+      def update
+           @registration = Registration.find(params[:id])
+           binding.pry
+          
+      end    
 
       def destroy
           @user= params[:user_id]
