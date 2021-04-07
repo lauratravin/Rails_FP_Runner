@@ -20,6 +20,10 @@ module SessionsHelper
        
       end  
 
-      
+      def valid_user?(user)
+         if current_user(session) == user || is_admin?(session) 
+            true
+         end  
+     end   
 
 end

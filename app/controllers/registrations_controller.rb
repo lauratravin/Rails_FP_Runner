@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
   before_action  :redirect_ifnotloggedin
+  before_action  :redirect_ifnotadmin,  except: [:show, :create, :destroy]
+
 
 
       def index
@@ -25,7 +27,7 @@ class RegistrationsController < ApplicationController
        
         @user = User.find(params[:user_id])
         @race = Race.find(params[:race])
-        if @user && @race 
+        if @user && @race && helpers.valid_user?(@user)
             @registration = Registration.new
             @registration.user = @user
             @registration.race= @race
@@ -41,22 +43,31 @@ class RegistrationsController < ApplicationController
       end  
          
       def edit
-        # binding.pry
-           if user = User.find_by(id: params[:user_id])       
+       
+           if user = User.find_by(id: params[:user_id])    
            @registration =  user.registrations.find_by(id: params[:id])
            end
       end
       def update
            @registration = Registration.find(params[:id])
-           binding.pry
+           if @registration
+            
+              @registration.update(:result => params[:result])
+              redirect_to user_path(@registration.user_id)
+           else
+              redirect_to edit_user_registration_path(@registration.user_id,@registration) 
+           end  
+    
           
       end    
 
       def destroy
           @user= params[:user_id]
-          @registration = Registration.find(params[:id])
-          @registration.destroy
-          redirect_to user_path(@user)
+          if helpers.valid_user?(@user)
+            @registration = Registration.find(params[:id])
+            @registration.destroy
+          end  
+            redirect_to user_path(@user)
 
       end 
 

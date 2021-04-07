@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end  
 
   def new
+      @newuser =  User.new
   end
 
   def create
@@ -29,8 +30,8 @@ class UsersController < ApplicationController
         @newuser.pace= params[:pace]
         @newuser.password= params[:password]
         # @newuser.admin = false
-        if   @newuser.save
-          
+        if   @newuser.valid?
+        @newuser.save   
         @newuser.generatememberid
 
         redirect_to login_path
@@ -40,14 +41,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    
     @user = User.find(params[:id])
-
-    @registered_active_races = @user.find_registered_races
-    
-    @available_races = @user.find_available_races
-    
-    @oldraces= @user.find_oldraces
+    if helpers.valid_user?(@user)
+      @registered_active_races = @user.find_registered_races   
+      @available_races = @user.find_available_races
+      @oldraces= @user.find_oldraces
+    else
+        redirect_to user_path(@user)
+    end     
 
   end 
 
@@ -62,16 +63,24 @@ class UsersController < ApplicationController
   end   
   def update
             @user = User.find(params[:id])
+           
             @user.update(:name => params[:user][:name],
                 :email => params[:user][:email],
                 :dob => params[:user][:dob],
                 :email => params[:user][:email],
                 :pace => params[:user][:pace])
+
+           if @user.valid?
+
             if helpers.is_admin?(session)
               redirect_to admin_path
             else   
               redirect_to user_path(@user)
             end
+          
+          else
+            render :edit
+          end  
   end 
   
   

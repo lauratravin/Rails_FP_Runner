@@ -1,5 +1,7 @@
 <h1>Main page</h1>
 
+<h2>New Races coming soon!!</h2>
+
 <ul>
 <% @activeraces.each do |r|%>
     
@@ -9,3 +11,16 @@
         <br>
 <% end %>
 </ul>
+
+
+
+<h2>Result table</h2>
+<% @races.order(:date).each do |r|%>
+ID: <%= r.id %> | Race: <%= r.name %> | Date: <%= r.date %>| Miles: <%= r.miles %> | Status: <%= r.status ? "Open" : "Closed"%> <br>
+      <% r.registrations.order(:result).each do |re|%>
+         Runner: <%= re.user.member_num %> |
+          Runner name:     <%= re.user.name %> |
+          Runner result:    <%= re.result ?  re.result : "Pending" %><br>
+       <% end %>
+  <hr>     
+<% end %>

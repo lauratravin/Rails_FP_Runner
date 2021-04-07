@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 #note: everyone can see race list
     def nyrr
         @activeraces = Race.activeraces
+        @races= Race.inactiveraces
     end    
 
 

@@ -1,37 +1,70 @@
 
 <h1> Sign up!</h1>
 
-<%# <%= form_for @user, controller: 'users', action: 'create' do |f| %>
- <%#    <%= f.label :name %>
- <%#    <%= f.text_field :name %> <br>
-
- <%#    <%= f.label 'Date of Birth'%>
- <%#    <%= f.date_field :dob %><br>
-
- <%#    <%= f.label 'Pace per mile'%>
- <%#    <%= f.number_field :pace %><br>
-
-  <%#   <%= f.label :email %>
-  <%#   <%= f.text_field :email %><br>
-   
-  <%#   <%= f.label :password %>
-  <%#   <%= f.password_field :password %><br>
-  
-  <%#   <%= f.submit "Create" %>
-<%# <% end %> 
-
 <%= form_tag users_path do %>
+
+
+<% if @newuser.errors.any? %>
+ <div id="error_explanation">
+   <h2>
+     <%= pluralize(@newuser.errors.count, "error") %>
+     prohibited this user from being saved:
+   </h2>
+ 
+   <ul>
+   <% @newuser.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+<% end %>
+
+ 
+<% if @newuser.errors[:name].empty?%>
+     <div class="field">
+<% else %>     
+     <div class="field_with_errors">
+<% end %>
+
     <label>Your name</label>
-    <%= text_field_tag :name %><br>
+    <%= text_field_tag :name, @newuser.name %><br>
+
+
+<% if @newuser.errors[:dob].empty?%>
+     <div class="field">
+<% else %>     
+     <div class="field_with_errors">
+<% end %>
 
     <label>Date of Birth</label>
-    <%= date_field_tag :dob %><br>
+    <%= date_field_tag :dob %><br> 
 
-    <label>Pace (minutes) per mile</label>
-    <%= number_field_tag :pace %><br>
+
+<% if @newuser.errors[:pace].empty?%>
+     <div class="field">
+<% else %>     
+     <div class="field_with_errors">
+<% end %>
+
+   <label>Pace (minutes) per mile</label>
+    <%= number_field_tag :pace %><br> 
+
+<% if @newuser.errors[:email].empty?%>
+     <div class="field">
+<% else %>     
+     <div class="field_with_errors">
+<% end %>
 
     <label>Email</label>
     <%= text_field_tag :email %><br>
+
+
+<% if @newuser.errors[:password].empty?%>
+     <div class="field">
+<% else %>     
+     <div class="field_with_errors">
+<% end %>
+
 
     <label>Password (1234)</label>
     <%= password_field_tag :password %><br>

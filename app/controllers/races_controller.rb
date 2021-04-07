@@ -23,8 +23,8 @@ layout :choose_layout
         @race.miles= params[:race][:miles]
         @race.miles= params[:race][:latitud]
         @race.miles= params[:race][:longitud]
-
         @race.status = true #by default
+
         if @race.save
           redirect_to races_path
         else
