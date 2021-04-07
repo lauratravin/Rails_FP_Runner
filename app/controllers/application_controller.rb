@@ -21,7 +21,10 @@ class ApplicationController < ActionController::Base
            redirect_to login_path 
         end
     end  
-    
+    #for login with facebook
+    def after_sign_in_path_for(resource)
+        user_path(current_user)
+    end
 
 
 end

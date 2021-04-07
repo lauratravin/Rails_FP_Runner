@@ -19,10 +19,19 @@ class UsersController < ApplicationController
 
   def new
       @newuser =  User.new
+      if session["devise.facebook_data"]
+        @newuser.name = session[:name]
+      end  
   end
 
   def create
+        
         @newuser =  User.new
+        if session["devise.facebook_data"]
+          @newuser.uid= session["devise.facebook_data"]["uid"]
+          @newuser.provider = session["devise.facebook_data"]["provider"]
+        end  
+        
      
         @newuser.name= params[:name]
         @newuser.email= params[:email]
@@ -30,6 +39,7 @@ class UsersController < ApplicationController
         @newuser.pace= params[:pace]
         @newuser.password= params[:password]
         # @newuser.admin = false
+        binding.pry
         if   @newuser.valid?
         @newuser.save   
         @newuser.generatememberid
