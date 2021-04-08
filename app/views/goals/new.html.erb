@@ -1,0 +1,36 @@
+ 
+<%= form_for @goal do |f| %>
+
+<% if @goal.errors.any? %>
+ <div id="error_explanation">
+   <h2>
+     <%= pluralize(@goal.errors.count, "error") %>
+     prohibited this user from being saved:
+   </h2>
+ 
+   <ul>
+   <% @goal.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+<% end %>
+
+
+
+ <label>Goal Year:</label><br>  
+ <%= f.text_field :year %><br>
+
+
+ <label>Miles</label><br>
+ <%= f.number_field :miles %><br>
+
+
+
+ <%= f.hidden_field :user_id %>
+
+ <%= f.submit %>
+<% end %>
+
+
+ <%= link_to "back", user_path(@goal.user)  %> 

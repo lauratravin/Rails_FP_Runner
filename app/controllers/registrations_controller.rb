@@ -4,17 +4,15 @@ class RegistrationsController < ApplicationController
 
 
 
-      def index
-        if params[:user_id]
-            @registrations = User.find(params[:user_id]).registrations
-        else
-            @registrations = Registration.all
-        end        
-      end  
-     
-      # def new
-      #   @registration = Registration.new(:user_id => params[:user_id])
+      # def index
+      #   if params[:user_id]
+      #       @registrations = User.find(params[:user_id]).registrations
+      #   else
+      #       @registrations = Registration.all
+      #   end        
       # end  
+     
+    
       def show
        
           @registration = Registration.find(params[:id])

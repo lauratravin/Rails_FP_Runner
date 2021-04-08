@@ -17,6 +17,7 @@ layout :choose_layout
         @race= Race.new
     end
     def create
+        # @race= Race.new(race_params(:name,:date,:miles,:latitud,:longitud))
         @race= Race.new
         @race.name= params[:race][:name]
         @race.date= params[:race][:date]
@@ -51,5 +52,12 @@ layout :choose_layout
     def updatestatus
         Race.update_status
     end    
+
+    private 
+    def race_params
+       params.require(:race).permit(:name)
+    end   
+
+
 
 end

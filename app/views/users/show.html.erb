@@ -10,6 +10,28 @@
 <h4>Member: <%=@user.member_num %></h4>
 <h4>Pace (minutes) per mile: <%=@user.pace %></h4>
 <h4>Email: <%=@user.email %></h4>
+<h4>Mi goal this year: <%= pluralize( @user.current_goal, 'mile') %>  </h4>
+
+<h4>Miles done: <%= pluralize( @user.ran_miles, 'mile') %>  </h4>
+
+ <% if @user.current_goal.nil? %>
+    
+    <h4>Pending Miles: "Set your goals"</h4>
+
+<h4>PendingMiles:   "Set your miles goals" </h4>
+ <% else %>
+      <% if @user.current_goal <= @user.ran_miles %>
+                  <h4>Pending Miles: "Congratulations, miles ompleted!"</h4>
+
+      <% else%>
+                  <h4>Miles to go: <%= pluralize( @user.current_goal.to_i - @user.ran_miles.to_i , 'mile') %>  </h4>
+
+      <% end %>
+ <% end %>
+
+<%=  link_to "New Goal", new_user_goal_path(@user)%>
+
+
 
 <% if !is_admin?(session)%>
    <p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
@@ -20,13 +42,14 @@
 <% @registered_active_races.each do |re|%>
 race id <%= re.race.id%> | <%= re.race.name%> | <%= re.race.date %> | <%= re.race.status %> | <%= link_to "Race Location", race_path(re.race) %>
 <%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %> |
-<%= link_to "Registration Details", user_registration_path(@user, re.id) %> 
+<%= link_to "Show Registration", user_registration_path(@user, re.id) %> 
  <br>
 <% end %>
 <hr>
 
 
 <h2>Available Races</h2>
+
 
 <%# this can go into a partial with some logic %>
 <% @available_races.each do |r| %>
@@ -53,5 +76,7 @@ Estimated time <%= o.estimated%>|
 Result time <%= o.result%> | 
 <%= link_to "Registration Details", user_registration_path(@user, o.id) %> <br>
 
-
 <% end %>
+
+
+

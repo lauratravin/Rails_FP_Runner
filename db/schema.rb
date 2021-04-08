@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_004255) do
+ActiveRecord::Schema.define(version: 2021_04_07_222324) do
+
+  create_table "goals", force: :cascade do |t|
+    t.string "year"
+    t.integer "miles"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+  end
 
   create_table "races", force: :cascade do |t|
     t.string "name"
@@ -26,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_04_05_004255) do
   create_table "registrations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "race_id"
-    t.integer "result"
+    t.float "result"
     t.float "estimated"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

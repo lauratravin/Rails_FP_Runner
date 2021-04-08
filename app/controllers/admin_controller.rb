@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
     before_action  :redirect_ifnotadmin
+    
 
 #    layout "admin"
 

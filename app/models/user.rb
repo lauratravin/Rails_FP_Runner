@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
     devise :omniauthable, :omniauth_providers => [:facebook]
 
     has_many :registrations
+    has_many :goals
     has_many :races, through: :registrations
 
     has_secure_password
@@ -71,9 +72,29 @@ class User < ActiveRecord::Base
    end 
 
 
-   def get_results
-    return "a"
+   def current_goal
+      this_year = Time.zone.now.year
+     
+      if !self.goals.empty?
+       self.goals.where(year:  this_year)[0].miles
+      else
+        return "0"
+      end   
    end 
+   
+   def ran_miles
+          myraces = self.races.where(status: false)
+        if  !myraces.empty?
+            sum = 0
+         
+            myraces.each do |m|
+                sum = sum + m.miles
+            end    
+            
+            return sum
+                    
+        end      
+   end  
    
 
 end
