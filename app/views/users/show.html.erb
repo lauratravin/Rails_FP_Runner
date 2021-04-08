@@ -14,19 +14,10 @@
 
 <h4>Miles done: <%= pluralize( @user.ran_miles, 'mile') %>  </h4>
 
- <% if @user.current_goal.nil? %>
+ <% if !(@user.current_goal.nil? || @user.ran_miles.nil?) %>
     
-    <h4>Pending Miles: "Set your goals"</h4>
+      <h4>Miles to go: <%= pluralize( @user.current_goal.to_i - @user.ran_miles.to_i , 'mile') %>  </h4>
 
-<h4>PendingMiles:   "Set your miles goals" </h4>
- <% else %>
-      <% if @user.current_goal <= @user.ran_miles %>
-                  <h4>Pending Miles: "Congratulations, miles ompleted!"</h4>
-
-      <% else%>
-                  <h4>Miles to go: <%= pluralize( @user.current_goal.to_i - @user.ran_miles.to_i , 'mile') %>  </h4>
-
-      <% end %>
  <% end %>
 
 <%=  link_to "New Goal", new_user_goal_path(@user)%>

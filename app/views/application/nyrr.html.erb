@@ -1,20 +1,33 @@
-<h1>Main page</h1>
-
-<h2>New Races coming soon!!</h2>
-
-<ul>
-<% @activeraces.each do |r|%>
-    
-        <%= r.name %>  |
-        <%= r.miles %>  |
-        <%= r.date %>     
-        <br>
-<% end %>
-</ul>
 
 
+<div class="col50">
+  <div class="quote"> 
+      <p>"If you can't fly, then run. If you can't run, then walk. If you can't walk, then crawl. But whatever you do, keep moving."
+      </p>
+      <p><em>Dr. Martin Luther King Jr</em></p>
+  </div>
+</div>
 
-<h2>Result table</h2>
+<div class="col50">
+   <div class="comingraces">
+           
+                <h1>New Races coming soon!!</h1>
+                
+
+                <ul>
+                <li> Date | Name</li>
+                <% @activeraces.order(:date).each do |r|%> 
+                 <li>   <%= r.date %> |
+                        <%= r.name %>  
+                </li>
+                <% end %>
+                </ul>
+   </div>
+</div>
+
+
+
+<h1>Result table</h1>
 <% @races.order(:date).each do |r|%>
 ID: <%= r.id %> | Race: <%= r.name %> | Date: <%= r.date %>| Miles: <%= r.miles %> | Status: <%= r.status ? "Open" : "Closed"%> <br>
       <% r.registrations.order(:result).each do |re|%>

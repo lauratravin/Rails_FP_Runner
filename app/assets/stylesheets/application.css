@@ -13,8 +13,108 @@
  *= require_tree .
  *= require_self
  */
+a{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ul li{
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-
- h1{
-     color: red;
+ header.admin  {
+     background: green;
  }
+ header.user  {
+     background: #092056;
+ }
+
+ .logo{  
+     display: inline;
+     width: 20%; 
+     padding: 40px;
+ }
+ nav, header.admin nav {
+    display: inline;
+    width: 70%; 
+    float: right;
+    color: #fff;
+    text-align: right;
+    margin-right:30px ;
+    margin-top: 30px;
+  
+ }
+
+ nav a, header.admin nav a{
+ display: inline-block;
+ border: solid 1px #fff;
+ padding: 15px 20px;
+ width: 80px;
+ text-align: center;
+ color: #fff;
+ text-decoration: none;
+
+ }
+nav a:last-child{ 
+     border: none;
+ }
+ nav a img{
+     
+     width: 60px;
+     
+ }
+
+ /*texts*/
+
+ body.admin h1,  body.admin h2{
+     color: green;
+     font-family: Arial, Helvetica, sans-serif;
+ }
+
+ body.user h1,  body.admin h2{
+    color: #092056;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.col50{
+    width: 50%;
+    display: inline;
+    float:left;
+    
+}
+/* home image application.nyrr.html*/
+.home-image {
+  background-image: url(runners.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 255px;
+}
+
+.quote{
+    padding: 40px 60px;
+    background: orange;
+    height: 250px; 
+}
+.quote p {
+    padding-top: 30px;
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}   
+.comingraces{
+    padding: 30px 60px 50px 60px;
+    background: rgb(223, 222, 219);
+    height: 250px; 
+    
+}
+.comingraces h1{
+    text-align: center;
+}
+.comingraces ul{
+    padding-left: 25%;
+}
+.comingraces ul li{
+    font-size: 18px;
+    list-style: none;
+    
+    
+}

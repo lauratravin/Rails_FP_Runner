@@ -12,15 +12,26 @@ class GoalsController < ApplicationController
     end    
 
     def create
+      
 
         @goal = Goal.new(goal_params)
-        @goal.save
-        if @goal.errors.any?
-          render :new
-        else    
-         redirect_to user_path(@goal.user)
-        end
+        @user = User.find(goal_params[:user_id])
+        
+        if !Goal.exist_duplicate?(goal_params[:year], @user)
+             @goal.save
+            
+            if @goal.errors.any?
+              render :new
+            else    
+             
+               redirect_to user_path(@goal.user)
+            end
 
+        else
+
+          flash[:notice] = 'This year has a goal, try another year.'
+          render :new
+          end
     end    
 
     private
