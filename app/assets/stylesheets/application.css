@@ -194,13 +194,19 @@ input{
     text-align: center;
 }
 .comingraces ul{
-    padding-left: 25%;
+    width: 500px;
+    margin: auto;
 }
 .comingraces ul li{
     font-size: 18px;
     list-style: none;
-    line-height: 25px;
-    
+    line-height: 29px;
+    background: #092056;
+    color: #fff;
+    padding-left: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
 }
 section{
     clear: left;
