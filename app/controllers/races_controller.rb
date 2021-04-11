@@ -55,6 +55,7 @@ layout :choose_layout
     end   
     def updatestatus
         Race.update_status
+        redirect_to races_path
     end    
 
     private 
