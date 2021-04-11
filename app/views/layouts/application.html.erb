@@ -10,33 +10,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
-  <header class="user">
-       <%= image_tag('nyrr_logo.svg', :class => "logo", alt:'logo')%> 
-      <nav>
-
-      <% if !is_logged_in?(session) %>
-
-       <%= link_to "SIGN UP", new_user_path %>
-        <%= link_to "LOGIN", login_path %> 
-         <%= link_to image_tag('facebook.png', :class => "fb", alt:'facebook'), user_facebook_omniauth_authorize_path %> 
-      <% else %>
-      
-       <%= link_to "Log Out", logout_path %>
-        <%# <%= link_to "Logout", destroy_user_session_path, method: :delete %> 
-
-      <% end %>
-      </nav>
-
-  </header>
+ 
 
 
 
  <body class="user">
-  <div class="home-image">
-     
 
-  </div>
- 
+     <%= render "layouts/header" %>
     <%= yield %>
+    <%= render "layouts/footer" %>
+
+
   </body>
 </html>

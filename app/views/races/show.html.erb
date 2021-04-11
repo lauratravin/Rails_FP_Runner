@@ -1,11 +1,7 @@
-<h1>Race Info</h1>
+<section class="show-race">   
+<h1>Race Information</h1>
 <%= @race.name %>
 <%= @race.status %>
-
-
-
-
-
 
     <h3> Location</h3>
    <p>
@@ -14,11 +10,17 @@
 <img alt="map" src="https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&center=<%=@race.latitud%>,<%=@race.longitud%>&key=<%= Rails.application.credentials.google_maps_api_key %>" >
 </p>
 
-<% if is_admin?(session)%>
- <%= link_to "Races", races_path%>
+      <% if is_admin?(session)%>
+            <div class="link_to">
+               <%= link_to "Races", races_path%>
+            </div>
+            <div class="link_to">
+               <%= link_to "Console", admin_path%> 
+            </div>
+      <%else%>
+              <div class="link_to">
+                 <%= link_to "Back", user_path(current_user(session))%>
+             </div>
+      <% end %>
 
- <%= link_to "Console", admin_path%> 
-<%else%>
-   <%= link_to "Back", user_path(current_user(session))%>
-
-<% end %>
+   </section>   

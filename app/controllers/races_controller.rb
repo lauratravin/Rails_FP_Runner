@@ -17,18 +17,20 @@ layout :choose_layout
         @race= Race.new
     end
     def create
-        # @race= Race.new(race_params(:name,:date,:miles,:latitud,:longitud))
-        @race= Race.new
-        @race.name= params[:race][:name]
-        @race.date= params[:race][:date]
-        @race.miles= params[:race][:miles]
-        @race.miles= params[:race][:latitud]
-        @race.miles= params[:race][:longitud]
-        @race.status = true #by default
+       
+         @race= Race.new(race_params)
+        # @race= Race.new
+        # @race.name= params[:race][:name]
+        # @race.date= params[:race][:date]
+        # @race.miles= params[:race][:miles]
+        # @race.miles= params[:race][:latitud]
+        # @race.miles= params[:race][:longitud]
+         @race.status = true #by default
 
         if @race.save
           redirect_to races_path
         else
+          flash[:notice] = 'Data not saved.'
           redirect_to new_race_path
         end    
     end
@@ -42,11 +44,12 @@ layout :choose_layout
     end 
     def update
         @race= Race.find(params[:id])  
-        @race.update( :name => params[:race][:name],
-                      :miles => params[:race][:miles],
-                      :date => params[:race][:date],
-                      :latitud => params[:race][:latitud],
-                      :longitud => params[:race][:longitud])
+        # @race.update( :name => params[:race][:name],
+        #               :miles => params[:race][:miles],
+        #               :date => params[:race][:date],
+        #               :latitud => params[:race][:latitud],
+        #               :longitud => params[:race][:longitud])
+        @race.update(race_params)
         redirect_to races_path              
     end   
     def updatestatus
@@ -55,7 +58,7 @@ layout :choose_layout
 
     private 
     def race_params
-       params.require(:race).permit(:name)
+       params.require(:race).permit(:name,:date,:miles,:longitud,:latitud)
     end   
 
 

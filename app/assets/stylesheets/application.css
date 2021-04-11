@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ td, th {padding:0}
+
 a{
     color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -20,27 +22,38 @@ a{
 ul li{
     font-family: Arial, Helvetica, sans-serif;
 }
+td,th{
+    font-family: Arial, Helvetica, sans-serif;
+}
 
- header.admin  {
+header.admin  {
      background: green;
  }
  header.user  {
      background: #092056;
  }
+.admin footer{
+    background: green;
+}
 
  .logo{  
      display: inline;
      width: 20%; 
      padding: 40px;
  }
+ nav{
+    display: inline-block;
+ }
  nav, header.admin nav {
-    display: inline;
+  
     width: 70%; 
     float: right;
     color: #fff;
     text-align: right;
     margin-right:30px ;
     margin-top: 30px;
+    /* border: solid 1px #fff; */
+   
   
  }
 
@@ -50,15 +63,23 @@ ul li{
  padding: 15px 20px;
  width: 80px;
  text-align: center;
+ vertical-align: middle;
  color: #fff;
  text-decoration: none;
 
  }
-nav a:last-child{ 
+ nav div.fb-ico{
+    display: inline-block;
+
+   
+ }
+ nav div.fb-ico a{ 
      border: none;
+     width: 60px;
+     padding-top: 10px;
  }
  nav a img{
-     
+     padding-top: 10px;
      width: 60px;
      
  }
@@ -80,7 +101,70 @@ nav a:last-child{
     float:left;
     
 }
+.clear{
+    clear:both;
+    content: "";
+
+}
+footer{
+    
+  
+    margin-top: 50px;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+    padding-top: 50px;
+    color: #fff;
+    background: #092056;
+}
+
+.link_to {
+    margin-top: 40px;
+    display: inline-block;
+}
+.link_to a{
+
+    background: #092056;
+    color:#fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    width: 200px;
+    text-align: center;
+}
+.link_to_inline {
+    background: #fff;
+    color: #092056;
+    text-decoration: none;
+    font-size: 12px;
+    border: 1px solid #092056;
+    padding: 2px 3px;
+    text-align: center;
+}
+
+.link_to_inline:hover{
+    background: #092056;
+    color: #fff;
+}
+input[type=submit]{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+input{
+    margin-top: 5px;
+    border: 2px solid #4CAF50;
+    line-height: 2em;
+    outline: none;
+}
+
 /* home image application.nyrr.html*/
+
+   
+
 .home-image {
   background-image: url(runners.jpg);
   background-position: center;
@@ -115,6 +199,173 @@ nav a:last-child{
 .comingraces ul li{
     font-size: 18px;
     list-style: none;
+    line-height: 25px;
     
+}
+section{
+    clear: left;
+}
+section.home-section h1{
+    width: 100%;
+    text-align: center;
+    padding: 40px 0px;
+    font-size: 32px;
+}
+table#home-races-title{
+border: solid 1px #092056;
+width: 100%;
+border-collapse: collapse;
+
+}
+
+table#home-races-title tr th {
+    color: #fff;
+    background:#092056;
+    border-spacing: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 30px;
+
+   
     
+}
+
+#home-races-title table{
+   width: 100%;
+   border-collapse: collapse;
+   background: rgb(180, 180, 180);
+}
+#home-races-title table tr td{
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 70px;
+border-bottom: solid 1px #fff;
+}
+
+/* user/show page*/
+section.user-show{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+section.show {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+
+}
+
+section.show p {
+ margin: 10px
+}
+
+/* new-goal*/
+
+.new-goal{
+    margin-top: 50px;
+    height: 450px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* edit- user */
+.edit-user{
+    margin-top: 50px;
+    height: 450px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*show-race*/
+section.show-race{
+    font-family: Arial, Helvetica, sans-serif;
+}
+/*show-registration*/
+
+section.show-registration {
+    height: 450px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* admin-index*/
+
+section.console h2{
+ background: #377E22;
+ padding: 10px 0px;
+ padding-left: 10px;
+ color: #fff;
+}
+
+table.registrations{
+    width: 100%;
+}
+
+table.registrations tr td
+{
+    padding-left: 25px;
+    line-height: 1.3em;
+}
+table.results {
+    width: 100%;
+    padding-left: 15px;
+}
+table.results tr.title{
+    background: rgb(230, 230, 230);
+    height: 30px;
+  
+}
+table.results p{
+    padding-left: 20px;
+}
+
+table.runners{
+    width: 100%;
+    padding-left: 50px;
+
+}
+table.runners tr{
+}
+table.runners tr td{
+    width: 300px;
+}
+
+/*index-races*/
+section.index-races {
+ height: 650px;
+
+}
+
+section.index-races form{
+    margin-top: 50px;
+}
+section.index-races table{
+  width: 100%;  
+}
+
+section.index-races table th{
+    background: #377E22;
+    padding: 10px 0px;
+    color: #fff;
+ 
+  }
+
+/*users-index*/
+
+section.users-index{
+    font-family: Arial, Helvetica, sans-serif;
+}
+section.users-index{
+    height: 550px;
+}
+
+section.users-index table{
+    width: 100%;
+}
+
+section.users-index table th{
+    background: #377E22;
+    padding: 10px 0px;
+    color: #fff;
+}
+section.users-index table tr td{
+    text-align: center;
+    line-height: 1.2em;
 }

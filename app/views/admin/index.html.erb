@@ -1,35 +1,93 @@
-<h1>Admin's Console</h1>
+<h1>Hello Admin to Console</h1>
 
-<%= link_to "Races", races_path%>
-<%= link_to "Users", users_path%>
 
-<br>
-<h2>Registrations</h2>
-
+<div class="link_to">
+  <%= link_to "Races", races_path%>
+</div>
+<div class="link_to">
+    <%= link_to "Users", users_path%>
+</div>
+<section class="console">
+<div>
+   <h2>Registrations</h2>
+</div>
+<table class="registrations">
+    <tr>
+        <th>Race id</th>
+        <th>Date</th>
+        <th>Race Name</th>
+        <th>Miles</th>
+        <th>Runner Member</th>
+        <th>Runner Name</th>
+        <th>Runner Estimated time</th>
+        <th>Runner Real time</th>         
+    </tr> 
 <% @registrations.order(:race_id).each do |re|%>
 
+    <tr> 
+        <td>
+            
+            <% if re.race.status %>
+              <span style="background:green">  <%= re.race_id %>  </span>|
+            <% else %>
+            <span style="background:red">  <%= re.race_id %>  </span>|
+            <% end %> 
+         </td>  
+         <td>    
+                <%= re.race.date %> 
+         </td>      
+         <td>
+                <%= re.race.name %> 
+         </td> 
+       
+         <td>
+                <%= re.race.miles %> 
+         </td>     
+         <td> 
+                <%= re.user.member_num %> 
+         </td>       
+         <td> 
+                <%= re.user.name %> 
+         </td>  
+         <td>     
+                <%= re.estimated %> 
+         </td>
+         <td>       
+                <%= re.result %> 
+         </td>        
+                           
 
-    <% if re.race.status %>
-      <span style="background:green">  <%= re.race_id %>  </span>|
-    <% else %>
-     <span style="background:red">  <%= re.race_id %>  </span>|
-    <% end %> 
-        <%= re.race.name %> |
-          <%= re.race.status %> |
-        <%= re.race.miles %> |
-        <%= re.user.member_num %> |
-        <%= re.user.name %> 
-        <%= re.estimated %> |
-        <%= re.result %> <br>
+      </tr>      
  <%end %>
+</table>
 
-<h2>Result table</h2>
-<% @races.order(:date).each do |r|%>
-ID: <%= r.id %> | Race: <%= r.name %> | Date: <%= r.date %>| Miles: <%= r.miles %> | Status: <%= r.status ? "Open" : "Closed"%> | Total inscriptions: <%= r.registrations.count %><br>
-      <% r.registrations.order(:result).each do |re|%>
-         Runner: <%= re.user.member_num %> |
-          Runner name:     <%= re.user.name %> |
-          Runner result:    <%= re.result ?  re.result : "Pending" %><br>
-       <% end %>
-  <hr>     
-<% end %>
+
+<h2>Results table</h2>
+
+<table class="results">
+
+ 
+           <% @races.order(:date).each do |r|%>
+                    <tr class="title"> 
+                         <td> <p> ID: <%= r.id %> | Race: <%= r.name %> | Date: <%= r.date %> | Miles: <%= r.miles %>  | Status: <%= r.status ? "Open" : "Closed"%>  | Total inscriptions: <%= r.registrations.count %> </p></td> 
+                     </tr>
+                    <tr>
+                            <td>  <table class="runners">
+
+                                  <% r.registrations.order(:result).each do |re|%>
+                                          <tr>
+                                              <td> Runner: <%= re.user.member_num %> </td>
+                                              <td> Runner name:     <%= re.user.name %> </td>
+                                              <td> Runner result:    <%= re.result ?  re.result : "Pending" %> </td>
+                                          </tr>  
+                                  <% end %>
+                            </td> </table>
+                    </tr>
+          <% end %> 
+  </table>       
+       
+
+     
+
+
+</section>

@@ -1,6 +1,8 @@
+
+<section class="show-registration">
 <h1>Register</h1>
 
-<h1>Race Name: <%= @race.name %></h1>
+<h4>Race Name: <%= @race.name %></h4>
 <h4>Miles: <%= @race.miles %></h4>
 <h4>Date: <%= @race.date %></h4>
 
@@ -12,6 +14,11 @@
 
 
 <% if is_admin?(session)%>
-  <%= link_to "Add result", edit_user_registration_path(@user, @registration)%>
+  <div class="link_to">
+         <%= link_to "Add result", edit_user_registration_path(@user, @registration)%>
+  </div>  
 <% end %>
-<%= link_to "Back", user_path(@user)%>
+    <div class="link_to">
+         <%= link_to "Back", user_path(@user)%>
+   </div>  
+</section>

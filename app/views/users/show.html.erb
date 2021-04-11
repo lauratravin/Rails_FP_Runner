@@ -1,73 +1,81 @@
 
 <% if is_admin?(session)%>
     <h1>Admin, this is user is <%=@user.name %></h1>
-    <%= link_to "User console", users_path%><br>
-    <%= link_to "Console", admin_path%>
     <% else%>
     <h1>Welcome, <%=@user.name %></h1>
 <% end %>
 
-<h4>Member: <%=@user.member_num %></h4>
-<h4>Pace (minutes) per mile: <%=@user.pace %></h4>
-<h4>Email: <%=@user.email %></h4>
+<section class="user-show">
+
+<h4>Member: <%=@user.member_num %> </h4>
+<h4>  Email: <%=@user.email %> </h4>
+<h4> Pace (min/mile): <%=@user.pace %></h4>
+
 <h4>Mi goal this year: <%= pluralize( @user.current_goal, 'mile') %>  </h4>
 
 <h4>Miles done: <%= pluralize( @user.ran_miles, 'mile') %>  </h4>
 
- <% if !(@user.current_goal.nil? || @user.ran_miles.nil?) %>
+ <% if @user.current_goal.to_i - @user.ran_miles.to_i > 0 %>
     
       <h4>Miles to go: <%= pluralize( @user.current_goal.to_i - @user.ran_miles.to_i , 'mile') %>  </h4>
 
  <% end %>
 
-<%=  link_to "New Goal", new_user_goal_path(@user)%>
-
-
+<div class="link_to">
+  <%=  link_to "New Goal", new_user_goal_path(@user)%>
 
 <% if !is_admin?(session)%>
-   <p><%= link_to "Edit User Information", edit_user_path(current_user(session)) %><p>
+   <%= link_to "Edit User", edit_user_path(current_user(session)) %>
 <% end %>
+</div>
+</section>
+<section class="show">
+      <h2>Registrations </h2>
+      <% @registered_active_races.each do |re|%>
+            <p> Race <%= re.race.id%> | 
+             <%= re.race.name%> | 
+             <%= re.race.date %> | 
+             <%# <%= re.race.status %> 
+             
+             <%= link_to "Race Location",  race_path(re.race), :class => "link_to_inline" %>
+      <%= link_to "Show Registration", user_registration_path(@user, re.id), :class => "link_to_inline" %> 
+
+            <%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete , :class => "link_to_inline" %> </p>
+
+      <% end %>
+      <hr>
 
 
-<h1>Registrations </h1>
-<% @registered_active_races.each do |re|%>
-race id <%= re.race.id%> | <%= re.race.name%> | <%= re.race.date %> | <%= re.race.status %> | <%= link_to "Race Location", race_path(re.race) %>
-<%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete %> |
-<%= link_to "Show Registration", user_registration_path(@user, re.id) %> 
- <br>
+      <h2>Available Races</h2>
+      <% @available_races.each do |r| %>
+        <% if r.status && @user.valid_race(r.id) %>
+          <p>  Race <%= r.id %> |
+            <%= r.name %> |
+            <%= r.miles %>  | 
+            <%= r.date %> |
+          | <%= link_to "More", race_path(r) , :class => "link_to_inline"%>
+            <%= link_to "Register", user_registrations_path(@user,:race => r.id), method:  :post, :class => "link_to_inline" %> <p>
+        
+        <% end %>
+      <%end%>
+
+      <% if !@oldraces.empty? %>
+            <h2>Old Races</h2>
+
+            <% @oldraces.each do |o|%>
+                race id <%= o.race.id %>| 
+                <%= o.race.name%>| 
+                <%= o.race.date%>| 
+                Miles : <%= o.race.miles%>| 
+                Estimated time <%= o.estimated%>| 
+                Result time <%= o.result%> | 
+                <%= link_to "Registration Details", user_registration_path(@user, o.id), :class => "link_to_inline" %> <br>
+            <% end %>
+      <% end %>
+</section>
+<% if is_admin?(session)%>
+         <div class="link_to">
+            <%= link_to "User console", users_path%>
+            <%= link_to "Console", admin_path%>
+          </div>
 <% end %>
-<hr>
-
-
-<h2>Available Races</h2>
-
-
-<%# this can go into a partial with some logic %>
-<% @available_races.each do |r| %>
-  <% if r.status && @user.valid_race(r.id) %>
-race id  <%= r.id %> |
-      <%= r.name %> |
-      <%= r.miles %>  | 
-      <%= r.date %> |
-     | <%= link_to "More", race_path(r) %>
-      <%= link_to "Register", user_registrations_path(@user,:race => r.id), method:  :post %>  <br>
-     
-      
-  <% end %>
-<%end%>
-
-<h2>Old Races</h2>
-
-<% @oldraces.each do |o|%>
-race id <%= o.race.id %>| 
-<%= o.race.name%>| 
-<%= o.race.date%>| 
-Miles : <%= o.race.miles%>| 
-Estimated time <%= o.estimated%>| 
-Result time <%= o.result%> | 
-<%= link_to "Registration Details", user_registration_path(@user, o.id) %> <br>
-
-<% end %>
-
-
-

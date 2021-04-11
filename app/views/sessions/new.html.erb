@@ -1,4 +1,4 @@
-<h1>Login form</h1>
+<h1>Login</h1>
 
 <%= form_tag(sessions_path) do%>
      <%= text_field_tag :email, '', :placeholder => "Your Email"%>
@@ -7,3 +7,8 @@
      <%= submit_tag "Login"%>
     
 <% end %>
+<br>
+Note: admin@admin/pwd:1234<br>
+<div class="link_to">
+<%= link_to "HOME", root_path%>
+</div>

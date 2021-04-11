@@ -60,7 +60,7 @@ class RegistrationsController < ApplicationController
       end    
 
       def destroy
-          @user= params[:user_id]
+          @user= User.find_by_id(params[:user_id])
           if helpers.valid_user?(@user)
             @registration = Registration.find(params[:id])
             @registration.destroy
@@ -68,5 +68,7 @@ class RegistrationsController < ApplicationController
             redirect_to user_path(@user)
 
       end 
+
+     
 
 end

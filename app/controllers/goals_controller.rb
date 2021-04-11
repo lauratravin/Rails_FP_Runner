@@ -5,8 +5,8 @@ class GoalsController < ApplicationController
         if params[:user_id] && !User.exists?(params[:user_id])
             redirect_to user_path, alert: "User not found."
           else
-           
             @goal = Goal.new(user_id: params[:user_id])
+            
           end
         
     end    

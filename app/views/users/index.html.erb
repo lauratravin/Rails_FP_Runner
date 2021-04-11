@@ -1,14 +1,37 @@
-<% @users.order(:member_num).each do |u|%>
-<%= u.id%> |
-<%= u.member_num%> |
-<%= u.name%> |
-<%= u.dob%> |
-<%= u.pace%> minutes per mile |
-<%= u.uid%> |
-<%= u.registrations.count%> |
-<%= link_to "Edit", edit_user_path(u.id)%> 
-<%= link_to "Show", user_path(u.id)%> <br>
+<section class="users-index">
+<h4>List of Users</h4>
+<table>
+            <tr>
+               <th>User Id</th>
+               <th>Member number</th>
+               <th>Nombre</th>
+               <th>Dob</th>
+               <th>Pace</th>
+               <th>Facebook?</th>
+               <th>Registrations</th>
+               <th>Edit</th>
+               <th>Show</th>
+            
+            
+            </tr>
 
-<% end %>
 
+            <% @users.order(:member_num).each do |u|%>
+            <tr>
+                    <td>    <%= u.id%> </td>
+                    <td>     <%= u.member_num%> </td>
+                    <td>     <%= u.name%> </td>
+                    <td>    <%= u.dob%> </td>
+                    <td>    <%= u.pace%> min/mile </td>
+                    <td>    <%= u.uid  ? "Yes": "No" %> </td>
+                    <td>      <%=  u.registrations.count %> </td>
+                    <td>     <%= link_to "Edit", edit_user_path(u.id)%>  </td>
+                    <td>     <%= link_to "Show", user_path(u.id)%> </td> 
+            </tr>
+            <% end %>
+</table>
+
+<div class="link_to">
 <%= link_to "Console", admin_path%>
+</div>
+</section>

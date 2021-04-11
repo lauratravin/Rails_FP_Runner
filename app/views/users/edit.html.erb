@@ -1,4 +1,5 @@
-<h1> Edit User</h1>
+<section class="edit-user">
+<h4> Edit User</h4>
 
 
 <% if @user.errors.any? %>
@@ -36,8 +37,17 @@
 <% end %>
 
 <% if !is_admin?(session)%>
-   <%= link_to "Back", user_path(current_user(session))%><br>
-   <%= link_to "Console", admin_path%>
-  <% else %>
-  <%= link_to "User", users_path%>
-  <% end %>
+  <div class="link_to">
+      <%= link_to "Back", user_path(current_user(session)) %>
+  </div>  
+<% else %>
+
+  <div class="link_to">
+      <%= link_to "Console", admin_path %>
+  </div>  
+  <div class="link_to">
+     <%= link_to "User Console", users_path%>
+  </div>   
+<% end %>
+
+</section>

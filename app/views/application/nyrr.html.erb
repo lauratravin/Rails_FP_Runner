@@ -1,5 +1,8 @@
 
+  <div class="home-image">
+     
 
+  </div>
 <div class="col50">
   <div class="quote"> 
       <p>"If you can't fly, then run. If you can't run, then walk. If you can't walk, then crawl. But whatever you do, keep moving."
@@ -15,10 +18,10 @@
                 
 
                 <ul>
-                <li> Date | Name</li>
+               
                 <% @activeraces.order(:date).each do |r|%> 
-                 <li>   <%= r.date %> |
-                        <%= r.name %>  
+                 <li>   <%= r.date.strftime("%m/%d/%Y") %> <%= r.name %>  
+
                 </li>
                 <% end %>
                 </ul>
@@ -27,13 +30,40 @@
 
 
 
-<h1>Result table</h1>
-<% @races.order(:date).each do |r|%>
-ID: <%= r.id %> | Race: <%= r.name %> | Date: <%= r.date %>| Miles: <%= r.miles %> | Status: <%= r.status ? "Open" : "Closed"%> <br>
-      <% r.registrations.order(:result).each do |re|%>
-         Runner: <%= re.user.member_num %> |
-          Runner name:     <%= re.user.name %> |
-          Runner result:    <%= re.result ?  re.result : "Pending" %><br>
-       <% end %>
-  <hr>     
-<% end %>
+<section class="home-section">
+     <h1>RESULTS 2021</h1>
+<table id="home-races-title">
+
+        <% @races.order(:date).each do |r|%>
+            <tr>
+                <%# <th>Race Id: <%= r.id %></th> 
+                <th>Race <%= r.id %> - <%= r.name %></th>
+                <th>Date: <%= r.date %></th>
+                <th>Miles: <%= r.miles %></th>
+                <th>Status: <%= r.status ? "Open" : "Closed" %></th>
+            </tr>
+            
+            <tr> 
+                <td colspan="4">
+                  <table>
+                           <tr>
+                               <th>Runner</th>
+                               <th>Runner Name</th>
+                               <th>Result</th>
+                          </tr>
+                      <% r.registrations.order(:result).each do |re|%>
+                          <tr> 
+                               <td><%= re.user.member_num %> </td>
+                               <td><%= re.user.name %></td>
+                               <td> <%= re.result ?  re.result : "Pending" %></td>
+                          </tr>
+                     
+                      <% end %>    
+                  </table>
+
+               </td>
+            </tr>            
+                      
+        <% end %>
+</table>
+</section>

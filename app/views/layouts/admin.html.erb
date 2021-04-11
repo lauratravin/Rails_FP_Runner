@@ -10,18 +10,23 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-
+ <body class="admin">
 <header class="admin">
     <%= image_tag('nyrr_logo.svg', :class => "logo", alt:'logo')%> 
     <nav>
+       
        <%= link_to "ADMIN LOG OUT", logout_path %>
     </nav>
     
 </header>
 <hr>
 
-  <body class="admin">
-  <h1>Hello Admin</h1>
-    <%= yield %>
+ 
+       <%= yield %>
+
+       <%= render "layouts/footer" %>
+
+
+  
   </body>
 </html>

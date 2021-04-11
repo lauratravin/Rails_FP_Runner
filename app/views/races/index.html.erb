@@ -1,42 +1,55 @@
+
 <h1>All Races</h1>
 
-<h2>Races</h2>
+<section class="index-races">
 
-<% @races.order(:date).each do |r|%>
+<table class="all-races">
+       <tr>
+          <th>Race id</th>
+          <th>Name</th>
+          <th>Miles</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Total Reg.</th>
+          <th>Edit</th>
+          <th>Show</th>
+          
+       </tr>
+      <% @races.order(:date).each do |r|%>
+         <tr>  
+                  <td> <%= r.id %>  </td>
+                  <td> <%= r.name %>   </td>
+                  <td> <%= r.miles %>   </td>
+                  <td> <%= r.date %>  </td>
 
-        <%= r.id %>  |
-        <%= r.name %>  |
-        <%= r.miles %>  |
-        <%= r.date %> |
-
-       <%  if r.status  %>
-         <span style="background:green">   <%=  r.status %> </span>
-       <% else %>
-         <span style="background:red">   <%=  r.status %> </span>
-       <% end %>
-        |
-       Inscriptions: <%= r.registrations.count %>
-
-        <%= link_to "Edit Race", edit_race_path(r)%>
-         <%= link_to "Show Race", race_path(r)%>
-
-   <br>
- 
-<% end %>
+                  <td>  <%  if r.status  %>
+                           <span style="background:green">   <%=  r.status %> </span>
+                         <% else %>
+                             <span style="background:red">   <%=  r.status %> </span>
+                        <% end %>
+                  </td>
+                  <td> <%= r.registrations.count %>
+                  </td>
+                  <td>
+                    <%= link_to "Edit Race", edit_race_path(r)%>
+                  </td>  
+                  <td>
+                    <%= link_to "Show Race", race_path(r)%>
+                   </td> 
+           </tr>
+      <% end %>
+</table>
 
 
+<div class="link_to">
+  <%= link_to "Create Races", new_race_path%>
+</div>  
 
-
-
-
-
-
-
-
-
-<%= link_to "Create Races", new_race_path%>
+<div class="link_to">
+  <%= link_to "Console", admin_path%>
+</div> 
 
 <%= button_to "Change Races Status", :action => "updatestatus" %>
 
 
-<%= link_to "Console", admin_path%>
+</section>

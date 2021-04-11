@@ -1,14 +1,32 @@
+
+<% if @race.errors.any? %>
+ <div id="error_explanation">
+   <h2>
+     <%= pluralize(@race.errors.count, "error") %>
+     prohibited this date from being saved:
+   </h2>
+ 
+   <ul>
+   <% @race.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+<% end %>
+
+<%= flash[:notice] %>
+
 <%= form_for(@race) do |f| %>
  <%= f.label :name %>
- <%= f.text_field :name %>
+ <%= f.text_field :name %><br>
  <%= f.label :miles %>
- <%= f.number_field :miles %>
+ <%= f.number_field :miles %><br>
   <%= f.label :date %>
- <%= f.date_field :date %>
+ <%= f.date_field :date %><br>
    <%= f.label :latitud %>
- <%= f.text_field :latitud %>
+ <%= f.text_field :latitud %><br>
    <%= f.label :longitud %>
- <%= f.text_field :longitud %>
+ <%= f.text_field :longitud %><br>
 
  <%= f.submit %>
 <% end %>

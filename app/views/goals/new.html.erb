@@ -1,38 +1,52 @@
- 
-<%= form_for @goal do |f| %>
 
-<% if @goal.errors.any? %>
- <div id="error_explanation">
-   <h2>
-     <%= pluralize(@goal.errors.count, "error") %>
-     prohibited this user from being saved:
-   </h2>
- 
-   <ul>
-   <% @goal.errors.full_messages.each do |msg| %>
-     <li><%= msg %></li>
-   <% end %>
-   </ul>
- </div>
-<% end %>
+<section class="new-goal">
+  <h4>Create a goal</h4>
+          <%= form_for @goal do |f| %>
 
-
-<%= flash[:notice] %>
-
-
- <label>Goal Year:</label><br>  
- <%= f.text_field :year %><br>
+          <% if @goal.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@goal.errors.count, "error") %>
+              prohibited this date from being saved:
+            </h2>
+          
+            <ul>
+            <% @goal.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+          <% end %>
 
 
- <label>Miles</label><br>
- <%= f.number_field :miles %><br>
+          <%= flash[:notice] %>
+
+
+          <label>Goal Year:</label>
+          <%= f.text_field :year %><br>
+
+
+          <label>Miles</label>
+          <%= f.number_field :miles %><br>
 
 
 
- <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :user_id %>
 
- <%= f.submit %>
-<% end %>
+          <%= f.submit %>
+          <% end %>
+
+<h4>Current goals</h4>
+               <p>Year | Miles</p>
+    <% @goal.user.goals.each do |g|  %>
+            <%= g.year %> | <%= g.miles %> <br>
+
+    <% end %>
+       
 
 
- <%= link_to "back", user_path(@goal.user)  %> 
+          <div class="link_to">
+            <%= link_to "back", user_path(@goal.user)  %> 
+          </div> 
+
+</section>
