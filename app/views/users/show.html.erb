@@ -18,6 +18,10 @@
  <% if @user.current_goal.to_i - @user.ran_miles.to_i > 0 %>
     
       <h4>Miles to go: <%= pluralize( @user.current_goal.to_i - @user.ran_miles.to_i , 'mile') %>  </h4>
+ <% else%>
+        <% if  @user.ran_miles.to_i > @user.current_goal.to_i  %>
+           <h4> Congratulations! You met your goals this year! </h4>
+        <% end %> 
 
  <% end %>
 

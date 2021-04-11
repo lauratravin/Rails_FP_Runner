@@ -39,14 +39,14 @@ class UsersController < ApplicationController
         @newuser.pace= params[:pace]
         @newuser.password= params[:password]
         # @newuser.admin = false
-        binding.pry
-        if   @newuser.valid?
-        @newuser.save   
-        @newuser.generatememberid
+       
+          # @newuser.valid? #deprecated
+        if    @newuser.save   
+              @newuser.generatememberid
 
-        redirect_to login_path
+              redirect_to login_path
         else 
-            render :new 
+               render :new 
         end 
   end
 
