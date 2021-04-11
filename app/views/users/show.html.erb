@@ -63,13 +63,13 @@
             <h2>Old Races</h2>
 
             <% @oldraces.each do |o|%>
-                race id <%= o.race.id %>| 
+            <p> race id <%= o.race.id %>| 
                 <%= o.race.name%>| 
                 <%= o.race.date%>| 
                 Miles : <%= o.race.miles%>| 
                 Estimated time <%= o.estimated%>| 
                 Result time <%= o.result%> | 
-                <%= link_to "Registration Details", user_registration_path(@user, o.id), :class => "link_to_inline" %> <br>
+                <%= link_to "Registration Details", user_registration_path(@user, o.id), :class => "link_to_inline" %> </p>
             <% end %>
       <% end %>
 </section>
