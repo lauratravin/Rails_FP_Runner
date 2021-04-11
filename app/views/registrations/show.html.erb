@@ -8,12 +8,19 @@
 
 <h4>Runner <%= @user.name %>'s estimation time based on your pace: <%= @registration.estimated %> minutes </h4>
 
+ <h3> Location</h3>
+   <p>
+<%# <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&center=#{@race.latitud },#{@race.longitud}&key=#{Rails.application.credentials.google_maps_api_key}", alt: "Map" %> 
+
+<img alt="map" src="https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&center=<%=@race.latitud%>,<%=@race.longitud%>&key=<%= Rails.application.credentials.google_maps_api_key %>" >
+</p>
+
 <%if !@registration.race.status %>
    <h3> <%= @registration.result %> </h3>
 <% end %>
 
 
-<% if is_admin?(session)%>
+<% if is_admin?(session) && !@registration.race.status %>
   <div class="link_to">
          <%= link_to "Add result", edit_user_registration_path(@user, @registration)%>
   </div>  

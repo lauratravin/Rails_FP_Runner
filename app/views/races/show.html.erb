@@ -17,6 +17,10 @@
             <div class="link_to">
                <%= link_to "Console", admin_path%> 
             </div>
+            <div class="link_to">
+               <%= link_to "User's Profile", user_path(@user)%> 
+            </div>
+
       <%else%>
               <div class="link_to">
                  <%= link_to "Back", user_path(current_user(session))%>

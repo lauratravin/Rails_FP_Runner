@@ -2,7 +2,13 @@ class RegistrationsController < ApplicationController
   before_action  :redirect_ifnotloggedin
   before_action  :redirect_ifnotadmin,  except: [:show, :create, :destroy]
 
+  layout :choose_layout
 
+    def choose_layout
+        if helpers.is_admin?(session)
+        'admin'
+        end
+    end
 
       # def index
       #   if params[:user_id]

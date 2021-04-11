@@ -35,8 +35,9 @@ layout :choose_layout
         end    
     end
     def show
+      
         @race= Race.find(params[:id])
-        
+        @user= params[:user_id]  #I need the user here just for back button
 
     end
     def edit
@@ -58,7 +59,7 @@ layout :choose_layout
 
     private 
     def race_params
-       params.require(:race).permit(:name,:date,:miles,:longitud,:latitud)
+       params.require(:race).permit(:name,:date,:miles,:longitud,:latitud,:user_id)
     end   
 
 

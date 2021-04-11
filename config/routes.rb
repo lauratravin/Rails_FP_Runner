@@ -13,6 +13,9 @@ resources :users, only: [:show] do
 end  
 resources :registrations
 
+resources :users, only: [:show] do
+  resources :races, only: [:show]
+end
 
 resources :users do
  resources :goals, only: [:new]

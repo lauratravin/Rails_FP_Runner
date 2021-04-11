@@ -179,10 +179,11 @@ input{
     height: 250px; 
 }
 .quote p {
-    padding-top: 30px;
+    padding: 30px 15px;
     font-size: 1.2em;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     font-weight: bold;
+    background: rgb(204, 204, 204);
 }   
 .comingraces{
     padding: 30px 60px 50px 60px;
@@ -286,7 +287,7 @@ section.show-race{
 /*show-registration*/
 
 section.show-registration {
-    height: 450px;
+    height: 700px;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -335,7 +336,7 @@ table.runners tr td{
 
 /*index-races*/
 section.index-races {
- height: 650px;
+ height: 450px;
 
 }
 
@@ -374,4 +375,17 @@ section.users-index table th{
 section.users-index table tr td{
     text-align: center;
     line-height: 1.2em;
+}
+
+/*user-new*/
+section.user-new{
+    height: 450px;
+}
+/*session-new*/
+section.session-new{
+    height: 450px;  
+}
+/* race-new-edit*/
+section.race-new-edit{
+    height: 450px;  
 }

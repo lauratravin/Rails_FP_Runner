@@ -22,43 +22,42 @@
         <th>Runner Estimated time</th>
         <th>Runner Real time</th>         
     </tr> 
-<% @registrations.order(:race_id).each do |re|%>
-
-    <tr> 
-        <td>
-            
-            <% if re.race.status %>
-              <span style="background:green">  <%= re.race_id %>  </span>|
-            <% else %>
-            <span style="background:red">  <%= re.race_id %>  </span>|
-            <% end %> 
-         </td>  
-         <td>    
-                <%= re.race.date %> 
-         </td>      
-         <td>
-                <%= re.race.name %> 
-         </td> 
-       
-         <td>
-                <%= re.race.miles %> 
-         </td>     
-         <td> 
-                <%= re.user.member_num %> 
-         </td>       
-         <td> 
-                <%= re.user.name %> 
-         </td>  
-         <td>     
-                <%= re.estimated %> 
-         </td>
-         <td>       
-                <%= re.result %> 
-         </td>        
-                           
-
-      </tr>      
- <%end %>
+<% @races.order(:date).each do |r|%>
+             <% r.registrations.each do |re|%>
+                     <tr> 
+                            <td>
+                            
+                            <% if re.race.status %>
+                                   <span style="background:green">  <%= re.race_id %>  </span>|
+                            <% else %>
+                            <span style="background:red">  <%= re.race_id %>  </span>|
+                            <% end %> 
+                            </td>  
+                            <td>    
+                                   <%= re.race.date %> 
+                            </td>      
+                            <td>
+                                   <%= re.race.name %> 
+                            </td> 
+                            
+                            <td>
+                                   <%= re.race.miles %> 
+                            </td>     
+                            <td> 
+                                   <%= re.user.member_num %> 
+                            </td>       
+                            <td> 
+                                   <%= re.user.name %> 
+                            </td>  
+                            <td>     
+                                   <%= re.estimated %> 
+                            </td>
+                            <td>       
+                                   <%= re.result %> 
+                            </td>        
+                     </tr>   
+               <% end %>         
+ <% end %>
 </table>
 
 

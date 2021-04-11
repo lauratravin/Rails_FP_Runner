@@ -5,23 +5,22 @@ class Race < ActiveRecord::Base
     # validates :miles, presence: true
     # validates :date, presence: true
    
-def self.update_status
-    Race.all.each do |r|
-           if Date.today >= r.date
-            r.status = false 
-            r.save
-           end 
-    end    
-end
+        def self.update_status
+            Race.all.each do |r|
+                if Date.today >= r.date
+                    r.status = false 
+                    r.save
+                end 
+            end    
+        end
 
-def self.activeraces
-    Race.where(status: true)
-end    
+        def self.activeraces
+            Race.where(status: true)
+        end    
 
-def self.inactiveraces
-    Race.where(status: false)
-end    
+        def self.inactiveraces
+            Race.where(status: false)
+        end    
 
-
-
+      
 end

@@ -37,7 +37,7 @@
              <%= re.race.date %> | 
              <%# <%= re.race.status %> 
              
-             <%= link_to "Race Location",  race_path(re.race), :class => "link_to_inline" %>
+             <%= link_to "Map",  user_race_path(@user, re.race), :class => "link_to_inline" %>
       <%= link_to "Show Registration", user_registration_path(@user, re.id), :class => "link_to_inline" %> 
 
             <%= link_to "Cancel", user_registration_path(@user, re.id), method:  :delete , :class => "link_to_inline" %> </p>
@@ -53,7 +53,7 @@
             <%= r.name %> |
             <%= r.miles %>  | 
             <%= r.date %> |
-          | <%= link_to "More", race_path(r) , :class => "link_to_inline"%>
+          | <%= link_to "Map", user_race_path(@user,r) , :class => "link_to_inline"%>
             <%= link_to "Register", user_registrations_path(@user,:race => r.id), method:  :post, :class => "link_to_inline" %> <p>
         
         <% end %>
