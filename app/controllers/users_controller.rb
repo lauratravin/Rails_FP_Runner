@@ -32,13 +32,12 @@ class UsersController < ApplicationController
           @newuser.provider = session["devise.facebook_data"]["provider"]
         end  
         
-     
         @newuser.name= params[:name]
         @newuser.email= params[:email]
         @newuser.dob= params[:dob]
         @newuser.pace= params[:pace]
         @newuser.password= params[:password]
-        # @newuser.admin = false
+         @newuser.admin = false
        
           # @newuser.valid? #deprecated
         if    @newuser.save   
@@ -92,7 +91,6 @@ class UsersController < ApplicationController
             render :edit
           end  
   end 
-  
-  
+ 
   
 end

@@ -31,7 +31,7 @@ layout :choose_layout
           redirect_to races_path
         else
           flash[:notice] = 'Data not saved.'
-          redirect_to new_race_path
+          render :new
         end    
     end
     def show
@@ -50,8 +50,11 @@ layout :choose_layout
         #               :date => params[:race][:date],
         #               :latitud => params[:race][:latitud],
         #               :longitud => params[:race][:longitud])
-        @race.update(race_params)
-        redirect_to races_path              
+        if  @race.update(race_params)
+            redirect_to races_path
+        else
+            render :edit
+        end                     
     end   
     def updatestatus
         Race.update_status
@@ -60,7 +63,7 @@ layout :choose_layout
 
     private 
     def race_params
-       params.require(:race).permit(:name,:date,:miles,:longitud,:latitud,:user_id)
+       params.require(:race).permit(:name,:date,:miles,:longitud,:latitud)
     end   
 
 
