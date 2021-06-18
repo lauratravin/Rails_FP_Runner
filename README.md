@@ -29,7 +29,10 @@ This application need Webpack and Devise in ordert to fully works.
 Refer to db/migration
 
 
-
+Steps
+Download the app folder, run
+bundle install
+rails s to start server 
 
 
 * ...
